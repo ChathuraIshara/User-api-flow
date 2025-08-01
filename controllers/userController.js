@@ -8,10 +8,14 @@ const getUsers = async (req,res)=>
 
 const createUser = async (req,res)=>
 {
-    const { name, email } = req.body;
-    const newUser = new User({ name, email });
-    const savedUser = await newUser.save();
-    res.status(201).json(savedUser);
+    try {
+        const { name, email } = req.body;
+        const newUser = new user({ name, email }); // Fixed: 'user' not 'User'
+        const savedUser = await newUser.save();
+        res.status(201).json(savedUser);
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
 }
 
 module.exports = {
