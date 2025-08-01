@@ -10,7 +10,7 @@ connectDb(); // Connect to MongoDB
 const app = express(); //create an express app
 app.use(express.json()); // Middleware to parse JSON bodies
 
-app.use('/api/users', userRoutes); // Mount user routes
+app.use('/api/usersDemo', userRoutes); // Mount user routes
 
 const port = process.env.PORT;
 app.listen(port,()=>console.log('Server is running on port',port)); // Start the server 

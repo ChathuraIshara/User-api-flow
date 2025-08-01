@@ -6,6 +6,15 @@ const getUsers = async (req,res)=>
     res.json(users);
 }
 
+const createUser = async (req,res)=>
+{
+    const { name, email } = req.body;
+    const newUser = new User({ name, email });
+    const savedUser = await newUser.save();
+    res.status(201).json(savedUser);
+}
+
 module.exports = {
-    getUsers
+    getUsers,
+    createUser
 };
