@@ -1,5 +1,8 @@
 const user = require('../models/userModel');
 
+// Controllers - Purpose: Handle request/response logic and coordinate between routes and services
+
+
 const getUsers = async (req,res)=>
 {
     const users = await user.find();
