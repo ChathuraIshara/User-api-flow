@@ -12,8 +12,8 @@ const getUsers = async (req,res)=>
 const createUser = async (req,res)=>
 {
     try {
-        const { name, email } = req.body;
-        const newUser = new user({ name, email }); // Fixed: 'user' not 'User'
+        const { name, email, role, status, createdAt } = req.body;
+        const newUser = new user({ name, email, role, status, createdAt }); // Fixed: 'user' not 'User'
         const savedUser = await newUser.save();
         res.status(201).json(savedUser);
     } catch (error) {
@@ -23,10 +23,17 @@ const createUser = async (req,res)=>
 
 const updateUser = async (req,res)=>{
     const { id } = req.params; 
-    const { name, email } = req.body;
+    const { name, email, role, status } = req.body; // Include all fields that can be updated
 
     try {
-        const updatedUser = await user.findByIdAndUpdate(id, { name, email }, { new: true });
+        // Only include fields that are provided in the request
+        const updateData = {};
+        if (name) updateData.name = name;
+        if (email) updateData.email = email;
+        if (role) updateData.role = role;
+        if (status) updateData.status = status;
+
+        const updatedUser = await user.findByIdAndUpdate(id, updateData, { new: true });
         if (!updatedUser) {
             return res.status(404).json({ message: 'User not found' });
         }
