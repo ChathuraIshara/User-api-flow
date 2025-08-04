@@ -98,7 +98,7 @@ jobs:
       id: meta
       uses: docker/metadata-action@v5
       with:
-        images: your-dockerhub-username/user-api
+        images: chathuraishara/user-api
         tags: |
           type=ref,event=branch
           type=ref,event=pr
