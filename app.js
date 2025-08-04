@@ -11,5 +11,11 @@ app.use(express.json()); // Middleware to parse JSON bodies
 
 app.use('/api/usersDemo', userRoutes); // Mount user routes
 
+const cors = require('cors');
+app.use(cors({
+  origin: 'http://localhost:5173', // React app url
+  credentials: true
+}));
+
 const port = process.env.PORT;
 app.listen(port,()=>console.log('Server is running on port',port)); // Start the server 
